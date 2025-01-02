@@ -1,3 +1,22 @@
+Metadata-Version: 2.1
+Name: db-connector-kr
+Version: 0.1.1
+Summary: A Python library for connecting to various databases.
+Home-page: https://github.com/lim39/dbconnector
+Author: Sanggu Lim
+Author-email: data.ai.lim39@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas
+Requires-Dist: snowflake-connector-python
+Requires-Dist: pymysql
+Provides-Extra: postgres
+Requires-Dist: psycopg2-binary; extra == "postgres"
+
 # db-connector-kr
 
 `db-connector-kr` is a Python library designed to simplify database interactions across multiple DBMS platforms. It provides a consistent interface for executing queries, retrieving results as pandas DataFrames, and inserting data efficiently.
@@ -26,8 +45,6 @@ Install `db-connector-kr` via pip (once published to PyPI):
 ```bash
 pip install db-connector-kr[postgres]
 ```
-
-**!PostgreSQL**
 
 ---
 
