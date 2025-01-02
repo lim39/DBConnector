@@ -27,7 +27,11 @@ Install `db-connector-kr` via pip (once published to PyPI):
 pip install db-connector-kr[postgres]
 ```
 
-**!PostgreSQL**
+**※※※If you encounter the error** `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb1 in position 0: invalid start byte` **during installation**, it might be due to an encoding issue in your Python runtime environment. 
+Please try running the following command and then reinstall the `db-connector-kr` module:
+```bash
+pip install --only-binary psycopg2-binary psycopg2-binary
+```
 
 ---
 
