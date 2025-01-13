@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="db-connector-kr",
-    version="0.1.1",
+    version="0.1.2",
     author="Sanggu Lim",
     author_email="data.ai.lim39@gmail.com",
     description="A Python library for connecting to various databases.",
@@ -14,6 +14,7 @@ setup(
         "pandas",
         "snowflake-connector-python",        
         "pymysql",
+        "pymssql"
     ],
     extras_require={
         "postgres": ["psycopg2-binary"],  # Optional dependency
