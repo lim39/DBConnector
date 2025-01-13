@@ -62,6 +62,8 @@ class DBConnector:
                 port=self._port,
             )
         elif self.dbms == "sf":
+            # 특정 경고 메시지 필터링
+            warnings.filterwarnings("ignore", message="Bad owner or permissions on .*connections.toml")
             self._con = snowflake.connector.connect(
                 account=self._account,
                 user=self._user,
