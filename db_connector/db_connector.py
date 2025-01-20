@@ -5,7 +5,7 @@ import snowflake.connector
 import psycopg2
 import psycopg2.extras
 import pymysql
-import pymssql
+# import pymssql
 # import cx_Oracle
 from snowflake.connector.pandas_tools import write_pandas
 import datetime as dt
@@ -45,12 +45,12 @@ class DBConnector:
             return None
         elif self.dbms == "mysql":
             return 3306
-        elif self.dbms == "mssql":
-            return 1433
+        # elif self.dbms == "mssql":
+        #     return 1433
         elif self.dbms == "oracle":
             return 1521
         else:
-            raise ValueError("Unsupported DBMS. Use 'pg', 'sf', 'mysql', 'mssql', or 'oracle'.")
+            raise ValueError("Unsupported DBMS. Use 'pg', 'sf', 'mysql', or 'oracle'.")
 
     def _init_connection(self):
         if self.dbms == "pg":
@@ -80,19 +80,19 @@ class DBConnector:
                 database=self._dbname,
                 port=self._port,
             )
-        elif self.dbms == "mssql":
-            self._con = pymssql.connect(
-                server=self._host,
-                user=self._user,
-                password=self._password,
-                database=self._dbname,
-                port=self._port,
-            )
+        # elif self.dbms == "mssql":
+        #     self._con = pymssql.connect(
+        #         server=self._host,
+        #         user=self._user,
+        #         password=self._password,
+        #         database=self._dbname,
+        #         port=self._port,
+        #     )
         # elif self.dbms == "oracle":
         #     dsn = cx_Oracle.makedsn(self._host, self._port, service_name=self._dbname)
         #     self._con = cx_Oracle.connect(user=self._user, password=self._password, dsn=dsn)
         else:
-            raise ValueError("Unsupported DBMS. Use 'pg', 'sf', 'mysql', 'mssql', or 'oracle'.")
+            raise ValueError("Unsupported DBMS. Use 'pg', 'sf', 'mysql', or 'oracle'.")
 
     def _validate(self):
         if self.dbms == "pg" and self._con.closed:
@@ -101,8 +101,8 @@ class DBConnector:
             self._init_connection()
         elif self.dbms == "mysql" and self._con is None:
             self._init_connection()
-        elif self.dbms == "mssql" and self._con._conn.closed:
-            self._init_connection()
+        # elif self.dbms == "mssql" and self._con._conn.closed:
+        #     self._init_connection()
         elif self.dbms == "oracle" and not self._con.ping():
             self._init_connection()
 
@@ -186,14 +186,14 @@ class DBConnector:
                     with self._con.cursor() as cur:
                         cur.executemany(query, tuples)
                     self._con.commit()
-                elif self.dbms == "mssql":
-                    tuples = [tuple(x) for x in df.to_numpy()]
-                    cols = ",".join(df.columns)
-                    placeholders = ",".join(["%s"] * len(df.columns))
-                    query = f"INSERT INTO {table} ({cols}) VALUES ({placeholders})"
-                    with self._con.cursor() as cur:
-                        cur.executemany(query, tuples)
-                    self._con.commit()
+                # elif self.dbms == "mssql":
+                #     tuples = [tuple(x) for x in df.to_numpy()]
+                #     cols = ",".join(df.columns)
+                #     placeholders = ",".join(["%s"] * len(df.columns))
+                #     query = f"INSERT INTO {table} ({cols}) VALUES ({placeholders})"
+                #     with self._con.cursor() as cur:
+                #         cur.executemany(query, tuples)
+                #     self._con.commit()
                 # elif self.dbms == "oracle":
                 #     tuples = [tuple(x) for x in df.to_numpy()]
                 #     cols = ",".join(df.columns)
@@ -221,10 +221,10 @@ class DBConnector:
                 self._con.close()
             elif self.dbms == "mysql" and self._con is None:
                 self._con.close()
-            elif self.dbms == "mssql" and not self._con._conn.closed:
-                self._con.close()
-            elif self.dbms == "oracle" and self._con:
-                self._con.close()
+            # elif self.dbms == "mssql" and not self._con._conn.closed:
+            #     self._con.close()
+            # elif self.dbms == "oracle" and self._con:
+            #     self._con.close()
 
     def __del__(self):
         self.close()
