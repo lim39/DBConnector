@@ -59,6 +59,25 @@ config = {
     "host": "localhost",
     "port": 5432
 }
+# Initialize the connector for maria, mysql
+config = {
+    "dbms": "mysql",
+    "user": "test_user",
+    "pw": "test_password",
+    "dbname": "test_db",
+    "host": "localhost",
+    "port": 3306,
+}
+
+# Initialize the connector for snowflake
+config = {
+    "dbms": "sf",
+    "user": "test_user",
+    "pw": "test_password",
+    "dbname": "test_db",
+    "account": "test_account",
+    "warehouse": "test_warehouse",
+}
 
 connector = DBConnector(**config)
 ```
