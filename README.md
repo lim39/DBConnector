@@ -18,7 +18,9 @@ Currently, only PostgreSQL, Snowflake, and MySQL are fully supported. MSSQL and 
 ## Installation
 
 Install `db-connector-kr` via pip (once published to PyPI):
-```pip install db-connector-kr```
+```bash
+pip install db-connector-kr
+```
 
 ### Optional Dependencies
 
@@ -46,7 +48,7 @@ pip install db-connector-kr[postgres]
 
 1. Initialization
 ```python
-from db_connector import DBConnector
+from db_connector.db_connector import DBConnector
 
 # Initialize the connector for PostgreSQL
 config = {
