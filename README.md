@@ -18,7 +18,9 @@ Currently, only PostgreSQL, Snowflake, and MySQL are fully supported. MSSQL and 
 ## Installation
 
 Install `db-connector-kr` via pip (once published to PyPI):
-```pip install db-connector-kr```
+```bash
+pip install db-connector-kr
+```
 
 ### Optional Dependencies
 
@@ -50,7 +52,7 @@ pip install --only-binary psycopg2-binary psycopg2-binary
 
 1. Initialization
 ```python
-from db_connector import DBConnector
+from db_connector.db_connector import DBConnector
 
 # Initialize the connector for PostgreSQL
 config = {
@@ -60,6 +62,25 @@ config = {
     "dbname": "your_database",
     "host": "localhost",
     "port": 5432
+}
+# Initialize the connector for maria, mysql
+config = {
+    "dbms": "mysql",
+    "user": "test_user",
+    "pw": "test_password",
+    "dbname": "test_db",
+    "host": "localhost",
+    "port": 3306,
+}
+
+# Initialize the connector for snowflake
+config = {
+    "dbms": "sf",
+    "user": "test_user",
+    "pw": "test_password",
+    "dbname": "test_db",
+    "account": "test_account",
+    "warehouse": "test_warehouse",
 }
 
 connector = DBConnector(**config)
